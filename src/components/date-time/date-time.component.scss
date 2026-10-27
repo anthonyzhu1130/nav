@@ -1,0 +1,62 @@
+.date-time-widget {
+  padding: 10px 12px;
+  margin: 8px 0 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.03);
+  font-size: 13px;
+  line-height: 1.9;
+  color: #666;
+  user-select: none;
+
+  .dt-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .dt-solar {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .dt-lunar {
+    color: #999;
+  }
+
+  .dt-week {
+    color: #999;
+  }
+
+  .dt-time {
+    font-weight: 600;
+    color: #1890ff;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* 暗黑模式适配（项目用 .dark-container / .dark 切换） */
+:host-context(.dark-container) .date-time-widget,
+:host-context(.dark) .date-time-widget {
+  background: rgba(255, 255, 255, 0.05);
+
+  .dt-solar {
+    color: #c9d1d9;
+  }
+
+  .dt-lunar,
+  .dt-week {
+    color: #969ca4;
+  }
+
+  .dt-time {
+    color: #58a6ff;
+  }
+}
+
+/* 小屏隐藏，避免挤占空间 */
+@media screen and (max-width: 768px) {
+  .date-time-widget {
+    display: none;
+  }
+}
