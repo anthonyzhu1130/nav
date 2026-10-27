@@ -13,7 +13,16 @@
       [autoplay]="commonService.settings().sideThemeAutoplay"
       [height]="commonService.settings().sideThemeHeight"
     />
-    <app-search />
+    <!-- 新增：包含日期和搜索框的 Flex 容器 -->
+    <div class="flex items-center justify-center gap-4 px-4 mt-6 mb-2 w-full max-w-5xl mx-auto">
+      <!-- 日期时间组件 -->
+      <app-date-time class="flex-shrink-0" />
+      
+      <!-- 原有的搜索框（用 div 包裹以控制宽度） -->
+      <div class="flex-1 w-full max-w-3xl">
+        <app-search />
+      </div>
+    </div>
     <component-group />
     <div class="px-2.5">
       <app-web-list [search]="false" [overflow]="true" [iconSize]="35" />
