@@ -2,6 +2,7 @@
 // Copyright @ 2018-present xiejiahe. All rights reserved.
 // See https://github.com/xjh22222228/nav
 
+import { DateTimeComponent } from 'src/components/date-time/date-time.component'
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { $t } from 'src/locale'
@@ -35,6 +36,7 @@ import { SidebarComponent } from 'src/components/sidebar/index.component'
     SwiperComponent,
     ClassTabsComponent,
     SidebarComponent,
+    DateTimeComponent
   ],
   selector: 'app-side',
   templateUrl: './index.component.html',
