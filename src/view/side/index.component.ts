@@ -36,7 +36,7 @@ import { SidebarComponent } from 'src/components/sidebar/index.component'
     SwiperComponent,
     ClassTabsComponent,
     SidebarComponent,
-    DateTimeComponent
+    DateTimeComponent,
   ],
   selector: 'app-side',
   templateUrl: './index.component.html',
