@@ -11,18 +11,40 @@ export function getWeekNumber(date: Date): number {
   return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7)
 }
 
-/** 公历：2024年12月25日 */
+/** 公历：26年10月28日 (年份取后两位) */
 export function formatSolar(date: Date): string {
-  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
+  const year = String(date.getFullYear()).slice(2)
+  return `${year}年${date.getMonth() + 1}月${date.getDate()}日`
 }
 
-/** 农历：腊月廿三（依赖浏览器 Intl，无需第三方库） */
+/** 数字转中文数字（支持 1-99） */
+function numberToChinese(numStr: string): string {
+  const n = parseInt(numStr, 10)
+  if (isNaN(n)) return numStr
+  const chars = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十']
+  if (n <= 10) return chars[n]
+  if (n < 20) return '十' + (n % 10 === 0 ? '' : chars[n % 10])
+  if (n < 100) return chars[Math.floor(n / 10)] + '十' + (n % 10 === 0 ? '' : chars[n % 10])
+  return numStr
+}
+
+/** 农历：九月十九日（依赖浏览器 Intl，并将数字转为中文） */
 export function formatLunar(date: Date): string {
   try {
-    return new Intl.DateTimeFormat('zh-CN-u-ca-chinese', {
+    let lunarStr = new Intl.DateTimeFormat('zh-CN-u-ca-chinese', {
       month: 'long',
       day: 'numeric',
     }).format(date)
+    
+    // 将字符串中的阿拉伯数字替换为中文数字
+    lunarStr = lunarStr.replace(/\d+/g, numberToChinese)
+    
+    // 某些浏览器可能输出 "九月十九" 没有 "日"，这里做个兜底补齐
+    if (!lunarStr.endsWith('日')) {
+      lunarStr += '日'
+    }
+    
+    return lunarStr
   } catch {
     return ''
   }
