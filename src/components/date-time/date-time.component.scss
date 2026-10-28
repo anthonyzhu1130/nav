@@ -1,48 +1,52 @@
 .date-time-widget {
-  padding: 10px 12px;
-  margin: 8px 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  margin: 0 16px 12px 16px; /* 左右留白，底部与菜单隔开 */
+  background: rgba(255, 255, 255, 0.5); /* 半透明白色底，融入草绿色背景 */
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.03);
   font-size: 13px;
-  line-height: 1.9;
-  color: #666;
+  color: #333;
   user-select: none;
+  transition: all 0.3s;
 
   .dt-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 8px;
+    justify-content: center;
+    gap: 6px;
+    line-height: 1.8;
   }
 
   .dt-solar {
     font-weight: 600;
-    color: #333;
   }
 
   .dt-lunar {
-    color: #999;
+    color: #666;
+    font-size: 12px;
   }
 
   .dt-week {
-    color: #999;
+    color: #888;
+    font-size: 12px;
   }
 
   .dt-time {
     font-weight: 600;
     color: #1890ff;
+    font-size: 15px;
     font-variant-numeric: tabular-nums;
   }
 }
 
-/* 暗黑模式适配（项目用 .dark-container / .dark 切换） */
-:host-context(.dark-container) .date-time-widget,
-:host-context(.dark) .date-time-widget {
-  background: rgba(255, 255, 255, 0.05);
-
-  .dt-solar {
-    color: #c9d1d9;
-  }
+/* 暗黑模式适配 */
+:host-context(.dark) .date-time-widget,
+:host-context(.dark-container) .date-time-widget {
+  background: rgba(0, 0, 0, 0.2);
+  color: #c9d1d9;
 
   .dt-lunar,
   .dt-week {
@@ -51,12 +55,5 @@
 
   .dt-time {
     color: #58a6ff;
-  }
-}
-
-/* 小屏隐藏，避免挤占空间 */
-@media screen and (max-width: 768px) {
-  .date-time-widget {
-    display: none;
   }
 }
