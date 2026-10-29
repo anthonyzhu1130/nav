@@ -1,9 +1,3 @@
-import { provideAppInitializer, inject } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { firstValueFrom } from 'rxjs'
-import { navs } from 'src/store'
-import { provideHttpClient } from '@angular/common/http'
- // 以上新增：到此
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core'
 import { registerLocaleData } from '@angular/common'
 import zh from '@angular/common/locales/zh'
@@ -63,12 +57,6 @@ if (!pwaEnable && isPhone) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-  provideHttpClient(),            // 新增：提供 HttpClient
-  provideAppInitializer(async () => {
-    const http = inject(HttpClient)
-    const data = await firstValueFrom(http.get<any[]>('data/db.json'))
-    navs.set(data)
-  }),
     provideNzIcons(icons),
     provideZoneChangeDetection({ eventCoalescing: true }),
     isHashMode
