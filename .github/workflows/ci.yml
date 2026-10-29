@@ -4,28 +4,41 @@ on:
     branches:
       - master
       - main
+
+# 过渡用：强制 JS Actions 使用 Node.js 24 运行。
+# 等 pnpm/action-setup 等全部升级到原生 Node.js 24 后，可以删除这一行。
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
       - name: Set Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v5
         with:
           node-version: 22.x
+
       - name: Install pnpm
+        # 如果 pnpm/action-setup 已经发布 v5，建议改成 pnpm/action-setup@v5
+        # 如果暂时没有 v5，保留 v4，上面的 FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 会处理警告
         uses: pnpm/action-setup@v4
         with:
           version: 10
+
       - name: Install
         run: |
           pnpm install
+
       # dist/404.html: gh-pages history mode
       - name: Build
         run: |
           npm run build-gh-pages
           cp dist/browser/index.html dist/browser/404.html
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
