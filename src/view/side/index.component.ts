@@ -1,6 +1,6 @@
 // 开源项目，未经作者同意，不得以抄袭/复制代码/修改源代码版权信息。
 // Copyright @ 2018-present xiejiahe. All rights reserved.
-// See https://github.com/xjh22222228/nav
+//See https://github.com/xjh22222228/nav
 
 import { DateTimeComponent } from 'src/components/date-time/date-time.component'
 import { Component } from '@angular/core'
@@ -33,7 +33,7 @@ import { SidebarComponent } from 'src/components/sidebar/index.component'
     NoDataComponent,
     FooterComponent,
     FixbarComponent,
-    SwiperComponent,
+  //  SwiperComponent,
     ClassTabsComponent,
     SidebarComponent,
     DateTimeComponent,
