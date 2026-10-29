@@ -7,12 +7,7 @@
   <app-sidebar />
 
   <div class="inner-layout dark-bg">
-    <app-swiper
-      *ngIf="commonService.settings().sideThemeImages.length > 0"
-      [images]="commonService.settings().sideThemeImages"
-      [autoplay]="commonService.settings().sideThemeAutoplay"
-      [height]="commonService.settings().sideThemeHeight"
-    />
+
     <!-- 新增：包含日期和搜索框的 Flex 容器 -->
     <div class="flex items-center justify-center gap-4 px-4 mt-6 mb-2 w-full max-w-5xl mx-auto">
       <!-- 日期时间组件 -->
