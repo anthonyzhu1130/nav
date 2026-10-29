@@ -68,7 +68,7 @@ export const appConfig: ApplicationConfig = {
     const http = inject(HttpClient)
     const data = await firstValueFrom(http.get<any[]>('data/db.json'))
     navs.set(data)
-  }),    cc
+  }),
     provideNzIcons(icons),
     provideZoneChangeDetection({ eventCoalescing: true }),
     isHashMode
