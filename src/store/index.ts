@@ -45,7 +45,6 @@ export const internal = signal<InternalProps>(internalJson)
 
 export const navs = signal<INavProps[]>(
   [] as INavProps[]),
-)
 
 export const component = signal<IComponentProps>(
   isSelfDevelop ? { zoom: 1, components: [] } : componentJson,
