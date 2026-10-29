@@ -5,8 +5,7 @@ on:
       - master
       - main
 
-# 过渡用：强制 JS Actions 使用 Node.js 24 运行。
-# 等 pnpm/action-setup 等全部升级到原生 Node.js 24 后，可以删除这一行。
+# 强制 Action 使用 Node 24（虽然替换了 pnpm/action-setup，加上这句能保证其他隐藏的 Action 也正常）
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -18,16 +17,16 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Set Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4 # v5 如果报错找不到，可以用 v4，v4 也兼容
         with:
           node-version: 22.x
+          cache: 'pnpm' # 建议加上，可以缓存依赖，加快后续构建
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install pnpm
-        # 如果 pnpm/action-setup 已经发布 v5，建议改成 pnpm/action-setup@v5
-        # 如果暂时没有 v5，保留 v4，上面的 FORCE_JAVASCRIPT_ACTIONS_TO_NODE24 会处理警告
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
+        run: corepack prepare pnpm@10 --activate
 
       - name: Install
         run: |
