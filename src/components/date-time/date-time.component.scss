@@ -2,49 +2,47 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* 增加左右 padding 拉伸，缩小底部间距 */
   padding: 8px 12px;
-  margin: 0 8px 6px 8px; /* 底部 margin 改为 6px，解决间隙过大的问题 */
+  margin: 0 8px 6px 8px;
   background: rgba(255, 255, 255, 0.5); 
   border-radius: 6px;
   font-size: 13px;
   color: #333;
   user-select: none;
+  /* 👇 新增：统一设置全局字体加粗 */
+  font-weight: 600; 
 
   .dt-row {
     display: flex;
     align-items: center;
-    /* 让左右两边贴边 */
     justify-content: space-between;
     line-height: 1.7;
-    /* 强制不换行，解决“日”和“三”掉下来的问题 */
     white-space: nowrap; 
   }
 
   .dt-solar {
-    font-weight: 600;
+    /* 如果不需要特别粗，可以去掉这里的 font-weight，继承父级即可 */
     font-size: 13px;
   }
 
   .dt-lunar {
-    color: #666;
+    color: #555; /* 颜色稍微加深一点，配合加粗更好看 */
     font-size: 12px;
   }
 
   .dt-week {
-    color: #888;
+    color: #777; 
     font-size: 12px;
   }
 
   .dt-time {
-    font-weight: 600;
     color: #1890ff;
     font-size: 14px;
     font-variant-numeric: tabular-nums;
   }
 }
 
-/* 暗黑模式适配保持不变 */
+/* 暗黑模式适配 */
 :host-context(.dark) .date-time-widget,
 :host-context(.dark-container) .date-time-widget {
   background: rgba(0, 0, 0, 0.2);
