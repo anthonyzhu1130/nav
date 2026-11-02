@@ -4,41 +4,28 @@ on:
     branches:
       - master
       - main
-
-# 关键：强制所有 Action 使用 Node 24 运行，彻底消除警告
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
-
-      # 先安装 pnpm，这样 setup-node 才能正确读取 pnpm 的缓存配置
+        uses: actions/checkout@v4
+      - name: Set Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.x
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
-
-      - name: Set Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-          cache: 'pnpm'
-
       - name: Install
         run: |
           pnpm install
-
       # dist/404.html: gh-pages history mode
       - name: Build
         run: |
-          # 注意这里用的是 npm run，建议统一改为 pnpm run，如果跑不通可以改回 npm
-          pnpm run build-gh-pages
+          npm run build-gh-pages
           cp dist/browser/index.html dist/browser/404.html
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
